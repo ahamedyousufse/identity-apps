@@ -1,16 +1,14 @@
 # Using Feature Flags
 
-Feature flags are a powerful way to enable or disable features in your application dynamically. This approach allows you to 
-deploy new features safely, perform A/B testing, and roll out features incrementally. In this guide, we'll walk through how to 
-define and use feature flags in identity-apps React applications.
+Feature flags are a way to control feature availability in an application without changing code at runtime. They help teams safely release features, perform incremental rollouts, and manage experimental functionality.
 
 ## High-Level Overview
 
-- Identify the High-Level Feature: Determine the main feature that you want to control using feature flags.
-- Locate Feature Config in Deployment Config: Ensure you have a configuration file or environment variables that manage your feature flags.
-- Choose a Suitable Feature Identifier: Define a unique identifier for your sub-feature.
-- Update the Disabled Features Array: Add your feature identifier to the disabledFeatures array in the feature configuration to disable it.
-- Use Feature Flags in Your Code: Conditionally show/hide UI elements or run logic based on the feature flag.
+- Identify the feature to be controlled using a feature flag  
+- Locate or define the feature configuration in the deployment config  
+- Assign a unique feature identifier for the feature  
+- Enable or disable the feature using configuration flags  
+- Use feature flags in code to conditionally render UI or execute logic
 
 ## Step-by-Step Guide
 
@@ -53,9 +51,11 @@ deployment.config.json:
 
 Select a unique and descriptive identifier for your feature. For our example, we'll use `organizations.filterByMetadataAttributes`.
 
-4. Update the Disabled Features Array
-   
-Add your feature identifier to the `disabledFeatures` array in your configuration.
+4. Configure Feature State in Deployment Config
+
+Feature flags are managed using the `disabledFeatures` array or equivalent feature configuration.
+
+Add your feature identifier to control its availability.
 
 Updated deployment.config.json:
 
@@ -115,8 +115,12 @@ export default App;
 In the above example, the "filter by metadata attribute" input is conditionally rendered based on the defined feature flag. If
 `organizations.filterByMetadataAttributes` is included in the `disabledFeatures` array, the section will not be displayed.
 
+## Best Practices
+
+- Always use clear and descriptive feature identifiers  
+- Remove unused feature flags once a feature is stable  
+- Avoid overusing feature flags to reduce code complexity  
+
 ## Conclusion
 
-Using feature flags allows you to manage feature deployment more flexibly and safely. By following the steps outlined in this 
-guide, you can define feature flags, manage them in your configuration, and use them to control the behavior and appearance of 
-your application dynamically
+Feature flags provide a safe and scalable way to manage feature rollouts in identity-apps. They help teams control feature visibility, reduce deployment risks, and support incremental development.
